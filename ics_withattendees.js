@@ -48,12 +48,13 @@ var ics = function(uidDomain, prodId) {
      * @param  {string} stop        Ending date of event
      * @param  {string} attendee    name and email of people attending
      */
-    'addEvent': function(subject, description, location, attendee, begin, stop, rrule) {
+    'addEvent': function(subject, description, location, attendee, attendeeemail, begin, stop, rrule) {
       // I'm not in the mood to make these optional... So they are all required
       if (typeof subject === 'undefined' ||
         typeof description === 'undefined' ||
         typeof location === 'undefined' ||
         typeof attendee === 'undefined' ||
+        typeof attendeeemail === 'undefined' ||
         typeof begin === 'undefined' ||
         typeof stop === 'undefined'
       ) {
@@ -185,7 +186,7 @@ var ics = function(uidDomain, prodId) {
         'DTSTART;VALUE=DATE-TIME:' + start,
         'DTEND;VALUE=DATE-TIME:' + end,
         'LOCATION:' + location,
-        'ATTENDEE;RSVP=TRUE;CN=' + attendee,
+        'ATTENDEE;RSVP=TRUE;CN=' + attendee +':mailto:'+ attendeeemail,
         'SUMMARY;LANGUAGE=en-us:' + subject,
         'TRANSP:TRANSPARENT',
         'END:VEVENT'
